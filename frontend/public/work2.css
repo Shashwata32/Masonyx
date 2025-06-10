@@ -1,0 +1,745 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.grid-background {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle at 10px 100px, var(--grid-color) 10px, transparent 89px);
+  background-size: 20px 20px;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.navbar {
+  padding-left: 5rem;
+  padding-top: 1.5rem;
+}
+
+.back-button {
+  text-decoration: none;
+  color: var(--text-color);
+  left: 13rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0;
+  font-family: "Oswald", sans-serif;
+  color: #333;
+}
+.subtitle {
+  font-size: 1rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.action-button,
+.primary-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 0.9em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-button {
+  background: #fff;
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+.action-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.primary-button:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.action-button.active-mode {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.drawing-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ddd;
+  background-color: #fcfcfc;
+  flex-grow: 1;
+  background-image: 
+    linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+  background-size: 20px 20px;
+  cursor: default;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.subtitle {
+
+  color: var(--accent-color);
+
+  font-size: 1rem;
+
+  margin-bottom: 1rem;
+
+}
+
+
+
+.button-group {
+
+  display: flex;
+
+  gap: 0.8rem;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  align-items: center;
+
+}
+
+
+
+.action-button {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  padding: 0.2rem 1rem;
+
+  background: var(--bg);
+
+  border: 2px solid var(--text);
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 0.7rem;
+
+  font-weight: 600;
+
+  color: var(--text);
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+}
+
+
+
+.action-button:hover {
+
+  background: var(--button-hover);
+
+  transform: translateY(-1px);
+
+}
+
+
+
+.icon {
+
+  font-size: 1rem;
+
+}
+
+
+
+.primary-button {
+
+  padding: 0.3rem 1rem;
+
+  background: var(--text);
+
+  color: var(--bg);
+
+  border: none;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 0.9rem;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+}
+
+
+
+.primary-button:hover {
+
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+
+}
+
+
+
+@media (max-width: 768px) {
+
+  .container {
+
+    padding: 0 1rem;
+
+  }
+
+
+
+  .title {
+
+    font-size: 2.5rem;
+
+  }
+
+
+
+  .button-group {
+
+    flex-direction: column;
+
+    width: 100%;
+
+  }
+
+
+
+  .action-button,
+
+  .primary-button {
+
+    width: 100%;
+
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+  .title {
+
+    font-size: 2rem;
+
+  }
+
+
+
+  .subtitle {
+
+    font-size: 0.9rem;
+
+  }
+
+}
+
+
+
+.container {
+
+  display: flex;
+
+  flex-direction: column; /* Stack title, buttons, drawing area, result */ /* Allow container to take available height */
+
+  padding: 10px 20px; /* Reduced top/bottom padding to give more space to drawing area */
+
+  box-sizing: border-box; /* Include padding in element's total width and height */
+
+}
+
+
+
+.header-area {
+
+  text-align: center;
+
+  margin-bottom: 15px; /* Spacing below the header */
+
+}
+
+
+
+.title {
+
+  margin: 0;
+
+  font-size: 2.2em;
+
+  color: #333;
+
+}
+
+
+
+.subtitle {
+
+  margin: 5px 0 0;
+
+  font-size: 1em;
+
+  color: #666;
+
+}
+
+
+
+.button-group {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 15px; /* Spacing below buttons */
+
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+
+  justify-content: center; /* Center buttons horizontally */
+
+}
+
+
+
+.action-button,
+
+.primary-button {
+
+  padding: 10px 20px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 5px;
+
+  background-color: #fff;
+
+  cursor: pointer;
+
+  font-size: 0.9em;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+
+}
+
+
+
+.action-button:hover,
+
+.primary-button:hover {
+
+  background-color: #e9e9e9;
+
+}
+
+
+
+.primary-button {
+
+  background-color: #28a745;
+
+  color: white;
+
+  border-color: #28a745;
+
+}
+
+
+
+.primary-button:hover {
+
+  background-color: #218838;
+
+}
+
+
+
+/* Style for the active mode button */
+
+.action-button.active-mode {
+
+  background-color: #007bff; /* Example: Blue background */
+
+  color: white;
+
+  border-color: #007bff;
+
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Glowing effect */
+
+}
+
+.drawing-area {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100vw; /* 100% of the viewport width */
+
+  height: 100vh; /* 100% of the viewport height */
+
+  margin: 0; /* Remove any potential margin issues */
+
+  width: 100%;
+
+  height: 100%;
+
+  position: relative;
+
+  border: 1px solid #ddd;
+
+  background-color: #fcfcfc;
+
+  flex-grow: 1; /* This is key: it expands to fill available space */
+
+  /* Corrected background-size for repeating grid */
+
+  background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+
+    linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+
+  background-size: 20px 20px; /* Grid size */
+
+  cursor: default; /* Default cursor */
+
+  overflow: hidden; /* Crucial: ensures lines don't show outside boundary */
+
+  border-radius: 8px; /* Slightly rounded corners for aesthetics */
+
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
+
+}
+
+
+
+/* Cursor for connection mode */
+
+.drawing-area.connection-mode-cursor {
+
+  cursor: crosshair;
+
+}
+
+
+
+.svg-container {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  pointer-events: none; /* VERY IMPORTANT: Allows mouse events to pass through SVG to nodes below */
+
+  z-index: 5;
+
+}
+
+
+
+/* Existing node and connection styles */
+
+.graph-node {
+
+  position: absolute;
+
+  background-color: #fff;
+
+  border: 1px solid #333;
+
+  padding: 10px 15px;
+
+  border-radius: 5px;
+
+  cursor: grab;
+
+  text-align: center;
+
+  font-weight: 500;
+
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
+  z-index: 10;
+
+  min-width: 60px;
+
+  white-space: nowrap; /* Prevent text wrapping inside node */
+
+  transition: box-shadow 0.1s, border-color 0.1s; /* Smooth transition for selection */
+
+}
+
+/* When in connection mode, nodes should show a pointer cursor */
+
+.drawing-area.connection-mode-cursor .graph-node {
+
+  cursor: pointer;
+
+}
+
+
+
+.graph-node.selected {
+
+  border: 2px solid blue;
+
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+
+}
+
+.input-node {
+
+  background-color: #e0ffe0;
+
+  border-color: green;
+
+}
+
+.output-node {
+
+  background-color: #ffe0e0;
+
+  border-color: red;
+
+}
+
+
+
+.connection-line {
+
+  stroke: #555;
+
+  stroke-width: 2;
+
+  fill: none;
+
+  pointer-events: all; /* Allow clicking on the line itself */
+
+  cursor: pointer;
+
+  transition: stroke 0.1s, stroke-width 0.1s;
+
+}
+
+.connection-line.selected {
+
+  stroke: blue;
+
+  stroke-width: 4;
+
+}
+
+
+
+.gain-input {
+
+  position: absolute;
+
+  background-color: white;
+
+  border: 1px solid #ccc;
+
+  padding: 2px 5px;
+
+  border-radius: 3px;
+
+  font-size: 0.8em;
+
+  cursor: text;
+
+  z-index: 15;
+
+  pointer-events: all;
+
+  text-align: center;
+
+  transform: translate(-50%, -50%); /* Center on the line */
+
+  min-width: 40px; /* Ensure it's wide enough */
+
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+.result-container {
+
+  margin-top: 15px; /* Spacing above result */
+
+  padding: 15px;
+
+  border: 1px solid #eee;
+
+  background-color: #f9f9f9;
+
+  border-radius: 8px;
+
+  text-align: center;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+}
+
+#transferFunctionResult {
+
+  font-weight: 600;
+
+  color: #333;
+
+}
+
+
+
+.main-container {
+
+        /* Replace with your actual main container class/id */
+
+        display: flex;
+
+        flex-direction: column; /* Arrange header, content, footer vertically */
+
+        height: 100vh; /* Make the main container take full viewport height */
+
+        width: 100vw; /* Make the main container take full viewport width */
+
+      }
+
+
+
+      .header-area {
+
+        /* For 'Masonyx' title and buttons */
+
+        /* Add styles for your header, e.g., padding, background */
+
+        padding: 20px; /* Example padding */
+
+        background-color: #f0f0f0; /* Example background */
+
+        text-align: center;
+
+        flex-shrink: 0; /* Prevent it from shrinking */
+
+      }
+
+
+
+      .content-area {
+
+        /* This will be the direct parent of your drawing area */
+
+        display: flex; /* Make it a flex container to allow drawing area to grow */
+
+        flex-grow: 1; /* Allow this content area to fill remaining vertical space */
+
+        padding: 20px; /* Adjust padding as needed, or remove if drawing area should touch edges */
+
+      }
+
+
+
+      .drawing-area {
+position: relative; /* Keep relative for internal positioning */
+border: 1px solid #ddd;
+background-color: #fcfcfc;
+flex-grow: 1; /* This is key: it expands to fill available space */
+background-image: linear-gradient(
+
+to right, #f0f0f0 1px,
+ transparent 1px
+
+
+),
+
+
+linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+background-size: 20px 20px; /* Grid size */
+cursor: default;
+overflow: hidden;
+border-radius: 8px; /* Slightly rounded corners for aesthetics */
+box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+/* Remove fixed width/height if present, let flex-grow handle it *
+ width: 100%; /* Ensure it takes full width of its flex parent *
+ height: 100%; /* Ensure it takes full height of its flex parent 
+}
+.transfer-function-area {
+/* For 'Transfer Function (C/R)' */
+/* Add styles for your footer, e.g., padding, background */
+padding: 20px; /* Example padding */
+background-color: #f0f0f0; /* Example background */
+text-align: center;
+flex-shrink: 0; /* Prevent it from shrinking */}
