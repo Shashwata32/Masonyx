@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masonyx - Advanced Mason Gain Formula Calculator</title>
+    <link rel="stylesheet" href="work.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&lt;</a>
+        <header>
+            <h1>Masonyx</h1>
+            <p>Mason Gain Formula Calculator for all your signals.</p>
+        </header>
+
+        <div class="controls">
+            <button class="button" id="inputButton">↓ Input (R)</button>
+            <button class="button" id="outputButton">↑ Output (C)</button>
+            <button class="button" id="addBlockButton">⊕ Add Block</button>
+            <button class="button" id="connectButton">🔗 Connect</button>
+            <button class="button calculate-btn" id="calculateBtn">Calculate Transfer Function</button>
+        </div>
+
+        <div class="drawing-area" id="drawingArea">
+            <svg class="svg-connections" id="svgConnections"></svg>
+
+            </div>
+
+        <div class="transfer-function-display">
+            <h2>Transfer Function (C/R):</h2>
+            <p id="transferFunctionResult">Result will appear here...</p>
+        </div>
+    </div>
+
+    <script src="work.js"></script>
+</body>
+</html>

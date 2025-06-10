@@ -1,0 +1,428 @@
+/* General Body and Container Styling (Similar to previous example) */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+:root {
+  --bg: #F1F0E8;
+  --primary: #b8c1ec;
+  --accent: #666666;
+  --highlight: #b8e4c9;
+  --text: #000000;
+  --muted: #9ba3c2;
+  --grid-color: rgba(0, 0, 0, 0.06);  /* 👈 add this line */
+}
+body {
+    margin: 0;
+    background-color:#F1F0E8;; /* Lighter, modern background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0px;
+    box-sizing: border-box;
+    /* Dashed grid using repeating-linear-gradient */
+    background-image: 
+        repeating-linear-gradient(to right, var(--grid-color) 0 0.7px, transparent 0.7px 60px),
+        repeating-linear-gradient(to bottom, var(--grid-color) 0 0.7px, transparent 0.7px 60px);
+    
+    z-index: -100;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Optional: slight slide-up effect */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 1s ease forwards;
+}
+.back-link {
+    position: absolute;
+    top: 0rem;
+    left: 5rem;
+    text-decoration: none;
+    color: #333;
+    font-size: 3rem;
+    font-weight: 300;
+    font-family: 'Oswald', sans-serif;
+}
+
+header h1 {
+    font-family: 'Oswald', sans-serif;
+    color: #200000;
+    font-size: 2.8em;
+    font-weight: 700;
+     margin-bottom: 0px;
+     margin-top: 0px;
+}
+
+header p {
+    margin-top: 0px;
+    font-family: 'poppins', sans-serif;
+    color: #3e4041;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+/* Controls (Buttons) Styling */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 5px; /* More space between buttons */
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+/* Specific Button Colors */
+#inputButton,
+#outputButton,
+#addBlockButton {
+    background-color: #fbfbfb; /* Light grey */
+    color: #000000; /* Darker text */
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#connectButton {
+    background-color: #3498db; /* Blue for connect */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(13, 117, 229, 0.4);
+}
+
+#calculateBtn {
+    background-color: #28a745; /* Green for calculate */
+    box-shadow: 0 4px 8px rgba(13, 229, 27, 0.3);
+    color: white;
+    left: 3rem;
+    border: none;
+}
+
+/* Hover and Active States for Buttons */
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Active Connect Button */
+#connectButton.active-mode {
+    background-color: #2980b9; /* Darker blue when active */
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5); /* Highlight */
+}
+
+/* Drawing Area Styling */
+.drawing-area {
+    border: 1px solid #bdc3c7; /* Slightly darker border */
+    background-color: #fbfbfb; /* Off-white background */
+    min-height: 550px; /* Increased height */
+    width: 100%;
+    position: relative; /* Crucial for absolute positioning of nodes and SVG */
+    overflow: hidden; /* Hide anything outside */
+    border-radius: 2px;
+    box-sizing: border-box;
+    cursor: default; /* Default cursor */
+
+    /* Dashed grid using repeating-linear-gradient */
+    background-image: 
+        repeating-linear-gradient(to right, var(--grid-color) 0 0.7px, transparent 0.7px 20px),
+        repeating-linear-gradient(to bottom, var(--grid-color) 0 0.7px, transparent 0.7px 20px);
+    
+}
+
+/* Cursor for Connection Mode */
+.drawing-area.connection-mode-cursor {
+    cursor: crosshair; /* Crosshair cursor when in connection mode */
+}
+
+
+/* Graph Node Styling */
+.graph-node {
+    background-color: #ffffff;
+    border: 2px solid #3498db; /* Blue border */
+    padding: 12px 20px;
+    border-radius: 6px;
+    position: absolute; /* Allows dragging and positioning */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    user-select: none;
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 60px; /* Ensure a minimum size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab; /* Default grab cursor for nodes */
+    transition: box-shadow 0.2s ease;
+}
+
+.graph-node:active {
+    cursor: grabbing;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Specific Node Types (optional distinctive styles) */
+.input-node {
+    border-color: #e67e22; /* Orange for Input */
+    border: 3px solid #e67e22;
+    background-color: #f9efe6;
+}
+
+.output-node {
+    border-color: #248b0d; /* Orange for Input */
+    border: 3px solid #30900e;
+    background-color: #ecf9e6;
+}
+
+.block-node {
+    border-color: 3px solid #000000; 
+    background-color: #f7fcf9;
+}
+
+
+/* Node Port Styling */
+.node-port {
+    width: 10px; /* Size of the circular port */
+    height: 10px;
+    background-color: #95a5a6; /* Grey port */
+    border-radius: 50%;
+    border: 2px solid #7f8c8d;
+    position: absolute;
+    cursor: crosshair; /* Crosshair when hovering over a port */
+    z-index: auto; /* Above the node */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.node-port:hover {
+    background-color: #3498db; /* Blue on hover */
+    border-color: #2980b9;
+}
+
+.node-port.input {
+    left: -7px; /* Half of width to extend outside */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.node-port.output {
+    right: -7px; /* Half of width to extend outside */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/* SVG Connections Styling */
+.svg-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows clicks to pass through to elements below */
+    z-index: auto; /* Below nodes and gain inputs */
+}
+
+.connection-line {
+    stroke: #34495e; /* Dark line color */
+    stroke-width: 2;
+    fill: none;
+    pointer-events: all; /* Important to make lines clickable */
+    cursor: pointer;
+    transition: stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.connection-line.selected {
+    stroke: #503ce7; /* Red when selected */
+    stroke-width: 3;
+}
+
+/* Gain Input Styling */
+.gain-input {
+    position: absolute;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 4px 4px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    width: 50px; /* Fixed width for consistency */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    z-index: 20; /* Above everything else */
+    transform: translate(-50%, -50%); /* Center it precisely on the line's midpoint */
+    cursor: text; /* Text cursor for input */
+}
+
+.gain-input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+
+/* Transfer Function Display */
+.transfer-function-display {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 25px; /* Light blue background */
+    border-radius: 2px;
+    text-align: center;
+    border: 1px solid #a4a4a4;
+    background-color: #fbfbfb;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.transfer-function-display h2 {
+    color: #000000;
+    margin-top: 2px;
+    margin-bottom: 0px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+#transferFunctionResult {
+    font-family: 'poppins', sans-serif; /* Monospace font for math */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745; /* Green for success */
+    word-wrap: break-word;
+    white-space: pre-wrap; /* Preserve formatting for complex expressions */
+}
+
+/* Custom Message Box (for showMessage function) */
+/* Custom Message Box (for showMessage function) */
+.custom-message-box {
+    position: fixed;
+    top: 20px; /* Distance from the top */
+    left: 50%; /* Start at the horizontal center */
+    transform: translateX(-50%); /* Adjust to truly center the box */
+    /* Removed background-color and color from here, they are in .info, .success, .error */
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Always on top */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Add visibility to transition */
+    visibility: hidden; /* Start hidden */
+}
+
+.custom-message-box.info {
+    background-color: #2f8ac7; /* Blue for info */
+    color: white; /* Explicitly set color here */
+}
+
+.custom-message-box.success {
+    background-color: #28a745; /* Green for success */
+    color: white; /* Explicitly set color here */
+}
+
+.custom-message-box.error {
+    background-color: #e74c3c; /* Red for error */
+    color: white; /* Explicitly set color here */
+}
+
+/* Animation for messages appearing */
+.custom-message-box.show {
+    opacity: 1;
+    visibility: visible; /* Make visible when 'show' class is present */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .container {
+        padding: 25px;
+        width: 98%;
+    }
+    .controls {
+        gap: 10px;
+    }
+    .button {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+    header h1 {
+        font-size: 2.2em;
+    }
+    header p {
+        font-size: 1em;
+    }
+    .drawing-area {
+        min-height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .button {
+        width: 100%;
+        margin-bottom: 8px; /* Add margin between stacked buttons */
+    }
+    .container {
+        padding: 15px;
+    }
+    .drawing-area {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    header p {
+        font-size: 0.9em;
+    }
+    .button {
+        font-size: 15px;
+        padding: 10px 15px;
+    }
+    .graph-node {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    .node-port {
+        width: 12px;
+        height: 12px;
+    }
+    .gain-input {
+        width: 40px;
+        font-size: 0.8em;
+    }
+    #transferFunctionResult {
+        font-size: 1.1em;
+    }
+}

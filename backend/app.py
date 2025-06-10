@@ -5,6 +5,10 @@ from mason_solver import MasonSolver
 app = Flask(__name__)
 # Configure CORS to allow requests from your frontend
 CORS(app, resources={r"/compute-transfer-function": {"origins": "http://localhost:3000"}})
+# Add this above your existing @app.route('/compute-transfer-function')
+@app.route('/')
+def index():
+    return "Masonyx backend is running!"
 
 @app.route('/compute-transfer-function', methods=['POST', 'OPTIONS'])
 def compute_tf():
@@ -31,3 +35,4 @@ def compute_tf():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
