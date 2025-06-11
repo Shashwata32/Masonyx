@@ -6,13 +6,12 @@ import ReactFlow, {
   Background,
   useNodesState,
   useEdgesState,
-  Handle, // Import Handle component
-  Position // For handle positioning
+  Handle,
+  Position
 } from 'react-flow-renderer';
 import axios from 'axios';
 import './App.css';
 
-// Custom node components with handles
 const InputNode = ({ data }) => (
   <div style={{
     background: '#ff0072',
@@ -82,8 +81,6 @@ const BlockNode = ({ data }) => (
   </div>
 );
 
-// ... rest of the code remains the same ...
-
 const nodeTypes = {
   input: InputNode,
   output: OutputNode,
@@ -131,9 +128,9 @@ function App() {
   const addNode = (type = 'block') => {
     const newNode = {
       id: getId(),
-      data: { 
-        label: type === 'input' ? 'Input' : 
-               type === 'output' ? 'Output' : 
+      data: {
+        label: type === 'input' ? 'Input' :
+               type === 'output' ? 'Output' :
                `Block ${idRef.current}`
       },
       position: { x: 100 + Math.random() * 300, y: 50 + Math.random() * 300 },
@@ -150,7 +147,7 @@ function App() {
         }
         return n;
       });
-      
+
       return updatedNodes.concat(newNode);
     });
 
@@ -181,23 +178,25 @@ function App() {
         output_node: outputNodeId
       };
 
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+
       const res = await axios.post(
-      'http://localhost:5000/compute-transfer-function', 
-      payload,
-      {
-        headers: {
-          'Content-Type': 'application/json'
+        `${backendUrl}/compute-transfer-function`,
+        payload,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      }
-    );
-    setResult(res.data.result);
-      
+      );
+      setResult(res.data.result);
+
     } catch (err) {
-    console.error('Full error:', err);
-    console.error('Response:', err.response);
-    setResult(`Error: ${err.message} - ${err.response?.data?.error || 'No response'}`);
-  }
-};
+      console.error('Full error:', err);
+      console.error('Response:', err.response);
+      setResult(`Error: ${err.message} - ${err.response?.data?.error || 'No response'}`);
+    }
+  };
 
   return (
     <div style={{ height: '100vh', width: '100%' }}>
@@ -224,19 +223,19 @@ function App() {
         <Background />
       </ReactFlow>
       {result && (
-        <div style={{ 
-          position: 'absolute', 
+        <div style={{
+          position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
-          padding: '20px', 
-          background: '#f5f5f5', 
+          padding: '20px',
+          background: '#f5f5f5',
           borderRadius: '8px',
           border: '1px solid #ddd',
           zIndex: 10
         }}>
           <h3>Transfer Function Result:</h3>
-          <div style={{ 
+          <div style={{
             fontFamily: 'monospace',
             background: '#333',
             color: '#0f0',
