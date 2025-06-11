@@ -7,7 +7,7 @@
 
 ---
 
-## 🔍 What is Masonyx?
+## 🔍 What is Masonyx? 
 
 **Masonyx** is a lightweight, browser-based tool built to simplify the process of calculating the **overall transfer function** of signal flow graphs using **Mason's Gain Formula**. Designed specifically for students and professionals in **Control Systems**, **Electronics and Communication Engineering (ECE)**, and **Systems Engineering**, Masonyx helps you visualize, input, and compute results quickly — without any clutter.
 
